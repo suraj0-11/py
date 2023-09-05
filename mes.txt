@@ -1,0 +1,53 @@
+.What are software interrupt instruction, explain in detail?
+ANS : A software interrupt instruction is a mechanism in computer programming that allows a program to request services from the operating system or to perform specific actions within the CPU. These interrupts are triggered by specific software instructions that cause the CPU to temporarily suspend the current task and switch to a predefined interrupt handler routine. This routine is part of the operating system and handles the requested service or action.
+
+The software interrupt instruction is often represented by a specific assembly language mnemonic, such as "INT" in x86 architecture. The syntax for a software interrupt instruction typically consists of the mnemonic followed by an interrupt number, which specifies the type of service or action to be performed.
+A software interrupt instruction is a mechanism that allows a program to communicate with the operating system or request its services. It acts as a gatekeeper between the application and the OS, enabling the program to perform tasks that are beyond its direct capabilities.
+
+When the program encounters a software interrupt instruction, it temporarily halts its execution and transfers control to a predefined interrupt handler routine within the operating system. This routine interprets the specific request made by the program based on the interrupt number provided and then performs the necessary actions.
+
+Software interrupt instructions are often represented by mnemonics, such as "INT" in x86 assembly language. The instruction is followed by a numerical value that corresponds to a specific service or action. For example, "INT 0x80" on x86 architecture is a common way to invoke a system call in Linux to request services like file I/O, process management, or memory allocation.
+
+======================================================================================================================================================================================
+2.What are program status register instructions, explain in detail?
+With examples 
+
+ANS : Program Status Registers
+The processor has one Current Program Status Register (CPSR), and five Saved Program Status Registers (SPSRs) for exception handlers to use. The Program Status Registers:
+1.hold information about the most recently performed ALU operation
+2.control the enabling and disabling of interrupts
+3.set the processor operating mode.
+
+the bit fields in the Program Status Registers.
+Zero flag (Z): Set when the result of an operation is zero.
+Negative flag (N): Set when the result of a signed operation is negative.
+Carry flag (C): Set when an arithmetic operation generates a carry or borrow.
+Overflow flag (V): Set when an arithmetic operation overflows the range of representable values.
+Interrupt flag (I): Controls the response to interrupt requests.
+Privilege mode (M): Indicates the current processor mode (user, supervisor, etc.).
+PSR instructions allow you to explicitly set, clear, or test these flags, enabling conditional branching or decision-making in the program flow. Here are some examples of PSR instructions:
+In some processor architectures, such as ARM-based architectures, the Program Status Register (PSR) is divided into two separate registers: the Current Program Status Register (CPSR) and the Saved Program Status Register (SPSR). These registers serve specific purposes and are used for managing the processor's state during exception handling, particularly when transitioning between different execution contexts, such as when handling interrupts or exceptions.
+
+Current Program Status Register (CPSR):
+The CPSR is the main register that contains the current processor status and control flags. It holds various condition flags, such as the Zero (Z), Negative (N), Carry (C), and Overflow (V) flags, along with the Interrupt (I) and Privilege Mode (M) bits. The CPSR reflects the processor's status during normal execution of instructions.
+
+Saved Program Status Register (SPSR):
+The SPSR is a register used to save the CPSR when an exception (e.g., interrupt, trap, or supervisor call) occurs during the normal execution of a program. When an exception is triggered, the processor saves the current CPSR value into the SPSR, allowing the processor to return to the original execution context after handling the exception.
+
+======================================================================================================================================================================================
+
+
+3.What are loading constants, explain in detail? with example 
+ANS : Loading constants refers to the process of loading constant values directly into registers or memory locations in a computer program. Constants are fixed values that do not change during the program's execution and are used for various purposes, such as initializing variables, defining mathematical parameters, or providing predefined values for specific operations.
+
+In many assembly languages and low-level programming languages, loading constants involves using specific instructions to store these fixed values into registers or memory locations. This process helps reduce code complexity and improve program efficiency since the constant values are readily available whenever needed, without having to recalculate them repeatedly.
+Loading constants refers to the process of storing fixed values directly into variables or memory locations in a computer program. Constants are values that do not change during the program's execution and are used for various purposes, such as initializing variables or providing predefined values for specific operations.
+
+Imagine you have a math problem that requires you to use the value "5" multiple times. Instead of writing "5" repeatedly in the calculation, you can assign it to a variable once and then use that variable throughout the problem. This way, you only need to change the value in one place if it ever needs to be updated.
+
+In programming, loading constants helps make your code more readable, maintainable, and efficient. By storing constants in variables or memory, you can easily reuse them whenever necessary, without having to remember or rewrite the value each time. This reduces the chance of errors and makes your code easier to understand.
+
+
+======================================================================================================================================================================================
+
+4.

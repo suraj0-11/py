@@ -1,27 +1,23 @@
-import requests
 import os
-from bs4 import BeautifulSoup
-url = 'https://xkcd.com/1/'
-if not os.path.exists('xkcd_comics'):
-   os.makedirs('xkcd_comics')
+import requests
+os.makedirs("xkcd_comics", exist_ok=True)
+comic_number = 1
 while True:
-  res = requests.get(url)
-  res.raise_for_status()
-  soup = BeautifulSoup(res.text, 'html.parser')
-  comic_elem = soup.select('#comic img')
-  if comic_elem == []:
-     print('Could not find comic image.')
-  else:
-     comic_url = 'https:' + comic_elem[0].get('src')
-     print(f'Downloading {comic_url}...')
-     res = requests.get(comic_url)
-     res.raise_for_status()
-     image_file = open(os.path.join('xkcd_comics', os.path.basename(comic_url)), 'wb')
-     for chunk in res.iter_content(100000):
-       image_file.write(chunk)
-     image_file.close()
-  prev_link = soup.select('a[rel="prev"]')[0]
-  if not prev_link:
-     break
-  url = 'https://xkcd.com' + prev_link.get('href')
-print('All comics downloaded.')
+    comic_url = f"https://xkcd.com/{comic_number}/"
+    response = requests.get(comic_url)
+    if response.status_code == 404:
+        break
+    img_url = f"https://xkcd.com/{comic_number}/info.0.json"
+    img_response = requests.get(img_url)
+
+    if img_response.status_code == 200:
+        comic_data = img_response.json()
+        img_url = comic_data["img"]
+        img_response = requests.get(img_url)
+        if img_response.status_code == 200:
+            filename = f"xkcd_comics/{comic_data['title']}.png"
+            with open(filename, "wb") as img_file:
+                img_file.write(img_response.content)
+            print(f"Downloaded: {comic_data['title']}")
+    comic_number += 1
+print("All XKCD comics downloaded successfully!")
